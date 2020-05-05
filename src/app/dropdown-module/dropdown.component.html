@@ -1,0 +1,28 @@
+<div class="form-group">
+  <button (click)="toggleDropDown()" [ngClass]="{'open': dropDownShown}">
+    <span>{{buttonLabel}}</span>
+  </button>
+  <div class="enq-dropdown-panel" *ngIf="dropDownShown">
+    <div>
+      <div class="controls">
+        <div class="toggles" *ngIf="multiple">
+          <button (click)="toggleAll(true)">Select All</button>
+          <button (click)="toggleAll(false)">Select None</button>
+        </div>
+        <div class="search">
+          <input type="text" [formControl]='optionSearch' class='search-box' placeholder="Search...">
+        </div>
+      </div>
+      <div class="results">
+        <ul id="results-list">
+          <li *ngFor="let option of options | dropdownFilter:optionSearch.value"
+              [ngClass]="{'selected': option.selected}"
+              data-option-id="option.value"
+              (click)="selectOption(option)">
+              {{option.label}}
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
